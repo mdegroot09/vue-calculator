@@ -1,8 +1,7 @@
 <template>
-    <div class="hello">
-        {{title}}
-        <div>
-            {{div}}
+    <div class="w-screen h-screen flex items-center justify-center">
+        <div class="rounded-md bg-blue-400 h-auto w-auto calculator">
+            
         </div>
     </div>
 </template>
@@ -18,7 +17,9 @@ export default {
 </script>
 
 <style scoped>
-.hello {
-    background: lightblue;
+.calculator {
+    height: calc(100vh - 200px);
+    width: calc(100vw - 200px);
+    max-width: 500px;
 }
 </style>
