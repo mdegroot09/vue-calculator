@@ -2,23 +2,27 @@
     <div class="w-screen h-screen grid items-center justify-center">
         <div class="calculator rounded-md bg-blue-400 grid grid-cols-1 grid-rows-2 items-center justify-center">
             <div class="screen bg-gray-100 rounded-md"></div>
-            <div class="calcBtns h-full grid grid-cols-4 grid-rows-4 gap-3">
-                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">1</div></div>
-                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">2</div></div>
-                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">3</div></div>
-                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">4</div></div>
-                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">5</div></div>
-                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">6</div></div>
+            <div class="calcBtns h-full grid grid-cols-4 grid-rows-5 gap-3">
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">(</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">)</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center" style="paddingTop: 3px">^</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">C</div></div>
                 <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">7</div></div>
                 <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">8</div></div>
                 <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">9</div></div>
-                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">10</div></div>
-                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">11</div></div>
-                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">12</div></div>
-                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">13</div></div>
-                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">14</div></div>
-                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">15</div></div>
-                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">16</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">/</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">4</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">5</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">6</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">X</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">1</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">2</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">3</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">-</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">0</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">.</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">+</div></div>
+                <div class="w-full bg-gray-100 rounded-md grid items-center"><div class="btnText text-center">=</div></div>
             </div>
         </div>
     </div>
