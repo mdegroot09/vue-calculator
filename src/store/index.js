@@ -2,11 +2,11 @@ import {createStore} from 'vuex'
 
 const store = createStore({
     state: {
-        currentVal: 0
+        screenText: 0
     },
     mutations: {
-        increment: state => state.currentVal++,
-        decrement: state => state.currentVal--
+        increment: state => state.screenText++,
+        decrement: state => state.screenText--
     }
 })
   

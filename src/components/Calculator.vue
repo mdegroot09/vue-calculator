@@ -2,48 +2,53 @@
     <div class="w-screen h-screen grid items-center justify-center">
         <div class="calculator rounded-md bg-blue-400 grid grid-cols-1 grid-rows-2 items-center justify-center">
             <div class="screen bg-yellow-100 rounded-md grid justify-end items-center">
-                <span class="screenText overflow-x-auto overflow-y-hidden text-4xl font-medium">{{currentVal}}</span>
+                <span class="screenText overflow-x-auto overflow-y-hidden text-4xl font-medium">{{screenText}}</span>
             </div> 
             <div class="calcBtns h-full grid grid-cols-4 grid-rows-5 gap-3">
-                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">(</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">)</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">^</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">/</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">7</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">8</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">9</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">x</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">4</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">5</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">6</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">-</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">1</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">2</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">3</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">+</button>
-                <button class="calcBtn cursor-pointer w-full bg-red-400 rounded-md grid items-center">C</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">0</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">.</button>
-                <button class="calcBtn cursor-pointer w-full bg-yellow-500 rounded-md grid items-center">=</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="increment()">(</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="increment()">)</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="increment()">^</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="increment()">/</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="increment()">7</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="increment()">8</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="increment()">9</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="increment()">x</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="increment()">4</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="increment()">5</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="increment()">6</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="increment()">-</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="increment()">1</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="increment()">2</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="increment()">3</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="increment()">+</button>
+                <button class="calcBtn cursor-pointer w-full bg-red-400 rounded-md grid items-center" @click="increment()">C</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="increment()">0</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="increment()">.</button>
+                <button class="calcBtn cursor-pointer w-full bg-yellow-500 rounded-md grid items-center" @click="increment()">=</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import {mapState} from 'vuex';
+
 export default {
     name: 'Calculator',
     props: {
         title: String,
         div: String
     },
-    data(){
-        return {
-            currentVal: this.$store.state.currentVal
+    methods: {
+        increment(){
+            this.$store.commit('increment')
         }
-    }
+    },
+    computed: mapState({
+        screenText: state => state.screenText
+    }),
 }
-</script>
+</script>)
 
 <style scoped>
 .calculator {
