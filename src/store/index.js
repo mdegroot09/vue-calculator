@@ -2,7 +2,7 @@ import {createStore} from 'vuex'
 
 const store = createStore({
     state: {
-        currentVal: 17
+        currentVal: 0
     },
     mutations: {
         increment: state => state.currentVal++,

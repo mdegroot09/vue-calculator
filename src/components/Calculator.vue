@@ -1,7 +1,9 @@
 <template>
     <div class="w-screen h-screen grid items-center justify-center">
         <div class="calculator rounded-md bg-blue-400 grid grid-cols-1 grid-rows-2 items-center justify-center">
-            <div class="screen bg-yellow-100 rounded-md">{{currentVal}}</div>
+            <div class="screen bg-yellow-100 rounded-md grid justify-end items-center">
+                <span class="screenText overflow-x-auto overflow-y-hidden text-4xl font-medium">{{currentVal}}</span>
+            </div> 
             <div class="calcBtns h-full grid grid-cols-4 grid-rows-5 gap-3">
                 <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">(</button>
                 <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">)</button>
@@ -54,6 +56,11 @@ export default {
 .screen {
     height: 70px;
     margin: 40px;
+    vertical-align: center;
+}
+.screenText {
+    margin-right: 15px;
+
 }
 .calcBtns {
     padding: 40px;
