@@ -44,6 +44,9 @@ const store = createStore({
             }
 
             else if(payload.val === '('){
+                if (state.appendToScreenNum){
+                    state.appendString = ' * '
+                }
                 state.equation += state.appendString + '('
                 state.appendToScreenNum = false
                 state.readyForNum = true
@@ -87,14 +90,21 @@ const store = createStore({
             }
 
             else if (payload.val === '='){
+                if (state.openParenthesisCount > 0){
+                    for(let i = state.openParenthesisCount; i > 0; i--){
+                        state.equation += ')'
+                    }
+                    state.openParenthesisCount = 0
+                }
                 try{
                     let solution = evaluate(state.equation)
                     if(typeof(solution) === 'number'){
                         state.screen1Num = solution
                     }
                 }
-                catch(e) {
-                    return
+                catch(e1) {
+                    state.screen1Num = 'ERROR'
+                    return 
                 }
             }
         }
