@@ -1,28 +1,28 @@
 <template>
     <div class="w-screen h-screen grid items-center justify-center">
         <div class="calculator rounded-md bg-blue-400 grid grid-cols-1 grid-rows-2 items-center justify-center">
-            <div class="screen bg-yellow-100 rounded-md"></div>
+            <div class="screen bg-yellow-100 rounded-md">{{currentVal}}</div>
             <div class="calcBtns h-full grid grid-cols-4 grid-rows-5 gap-3">
-                <div class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center"><div class="btnText text-center">(</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center"><div class="btnText text-center">)</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center"><div class="btnText text-center" style="paddingTop: 6px">^</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center"><div class="btnText text-center">/</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center"><div class="btnText text-center">7</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center"><div class="btnText text-center">8</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center"><div class="btnText text-center">9</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center"><div class="btnText text-center">x</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center"><div class="btnText text-center">4</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center"><div class="btnText text-center">5</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center"><div class="btnText text-center">6</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center"><div class="btnText text-center">-</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center"><div class="btnText text-center">1</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center"><div class="btnText text-center">2</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center"><div class="btnText text-center">3</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center"><div class="btnText text-center">+</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-red-400 rounded-md grid items-center"><div class="btnText text-center">C</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center"><div class="btnText text-center">0</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center"><div class="btnText text-center">.</div></div>
-                <div class="calcBtn cursor-pointer w-full bg-yellow-500 rounded-md grid items-center"><div class="btnText text-center">=</div></div>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">(</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">)</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">^</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">/</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">7</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">8</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">9</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">x</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">4</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">5</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">6</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">-</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">1</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">2</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">3</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center">+</button>
+                <button class="calcBtn cursor-pointer w-full bg-red-400 rounded-md grid items-center">C</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">0</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center">.</button>
+                <button class="calcBtn cursor-pointer w-full bg-yellow-500 rounded-md grid items-center">=</button>
             </div>
         </div>
     </div>
@@ -30,11 +30,16 @@
 
 <script>
 export default {
-  name: 'Calculator',
-  props: {
-      title: String,
-      div: String
-  }
+    name: 'Calculator',
+    props: {
+        title: String,
+        div: String
+    },
+    data(){
+        return {
+            currentVal: this.$store.state.currentVal
+        }
+    }
 }
 </script>
 
@@ -54,17 +59,15 @@ export default {
     padding: 40px;
 }
 .calcBtn {
-    opacity: .88;
-}
-.calcBtn:hover {
-    opacity: .94;
-}
-.calcBtn:active {
-    opacity: 1;
-}
-.btnText {
+    opacity: .85;
     vertical-align: middle;
     font-weight: 700;
     font-size: 1.3em;
+}
+.calcBtn:hover {
+    opacity: .90;
+}
+.calcBtn:active {
+    opacity: 1;
 }
 </style>
