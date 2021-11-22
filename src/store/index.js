@@ -9,10 +9,17 @@ const store = createStore({
         readyForNum: true,
         readyForOperation: false,
         appendString: '',
-        openParenthesisCount: 0
+        openParenthesisCount: 0,
+        subsequentEquation: false
     },
     mutations: {
         updateEquation(state, payload){
+
+            // if starting a subsequent equation and val is not a number
+            if (state.subsequentEquation === true && typeof(payload.val) !== 'number'){
+                // update equation to match solution value and continue 
+                state.equation = state.screen1Num
+            }
 
             // handle numbers
             if (typeof(payload.val) === 'number' && state.readyForNum){
@@ -20,8 +27,8 @@ const store = createStore({
                 if(!state.appendToScreenNum && payload.val === 0){
                     return 
                 }
-                // if beginning of equation
-                else if (state.screen1Num === 0 && !state.equation){
+                // if beginning of equation OR subsequent equation
+                else if ((state.screen1Num === 0 && !state.equation) || state.subsequentEquation === true){
                     state.screen1Num = payload.val
                     state.equation = String(payload.val)
                 }
@@ -40,6 +47,7 @@ const store = createStore({
                 state.readyForNum = true
                 state.readyForOperation = true
                 state.appendString = ''
+                state.subsequentEquation = false
                 return
             }
 
@@ -53,6 +61,7 @@ const store = createStore({
                 state.readyForOperation = false
                 state.appendString = ''
                 state.openParenthesisCount++
+                state.subsequentEquation = false
                 return
             }
 
@@ -74,6 +83,7 @@ const store = createStore({
                 state.readyForNum = true
                 state.readyForOperation = false
                 state.appendString = ' '
+                state.subsequentEquation = false
                 return
             }
 
@@ -86,6 +96,7 @@ const store = createStore({
                 state.readyForOperation = false,
                 state.appendString = '',
                 state.openParenthesisCount = 0
+                state.subsequentEquation = false
                 return
             }
 
@@ -100,6 +111,7 @@ const store = createStore({
                     let solution = evaluate(state.equation)
                     if(typeof(solution) === 'number'){
                         state.screen1Num = solution
+                        state.subsequentEquation = true
                     }
                 }
                 catch(e1) {
