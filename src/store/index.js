@@ -52,7 +52,7 @@ const store = createStore({
             }
 
             else if(payload.val === '('){
-                if (state.appendToScreenNum){
+                if (state.appendToScreenNum || state.readyForOperation){
                     state.appendString = ' * '
                 }
                 state.equation += state.appendString + '('
