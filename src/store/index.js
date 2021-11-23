@@ -1,7 +1,7 @@
 import {createStore} from 'vuex'
 import {evaluate} from 'mathjs'
 
-const store = createStore({
+export default createStore({
     state: {
         screen1Num: 0,
         equation: '',
@@ -13,7 +13,7 @@ const store = createStore({
         subsequentEquation: false
     },
     mutations: {
-        updateEquation(state, payload){
+        addNumber(state, payload){
 
             // if starting a subsequent equation and val is not a number
             if (state.subsequentEquation === true && typeof(payload.val) !== 'number'){
@@ -22,7 +22,7 @@ const store = createStore({
             }
 
             // handle numbers
-            if (typeof(payload.val) === 'number' && state.readyForNum){
+            if (state.readyForNum){
                 // don't allow zero as beginning number
                 if(!state.appendToScreenNum && payload.val === 0){
                     return 
@@ -50,8 +50,18 @@ const store = createStore({
                 state.subsequentEquation = false
                 return
             }
-
-            else if(payload.val === '('){
+        },
+        addOperation(state, payload){
+            state.equation += ` ${payload.val}`
+            state.appendToScreenNum = false
+            state.readyForNum = true
+            state.readyForOperation = false
+            state.appendString = ' '
+            state.subsequentEquation = false
+            return
+        },
+        addParenthesis(state, payload){
+            if(payload.val === '('){
                 if (state.appendToScreenNum || state.readyForOperation){
                     state.appendString = ' * '
                 }
@@ -75,52 +85,43 @@ const store = createStore({
                 state.openParenthesisCount--
                 return
             }
-
-            // handle operations
-            else if((payload.val === '^' || payload.val === '*' || payload.val === '/' || payload.val === '+' || payload.val === '-') && state.readyForOperation){
-                state.equation += ` ${payload.val}`
-                state.appendToScreenNum = false
-                state.readyForNum = true
-                state.readyForOperation = false
-                state.appendString = ' '
-                state.subsequentEquation = false
-                return
-            }
-
+        },
+        clear(state){
             // handle clear
-            else if (payload.val === 'C'){
-                state.screen1Num = 0,
-                state.equation = '',
-                state.appendToScreenNum = false,
-                state.readyForNum = true,
-                state.readyForOperation = false,
-                state.appendString = '',
+            state.screen1Num = 0,
+            state.equation = '',
+            state.appendToScreenNum = false,
+            state.readyForNum = true,
+            state.readyForOperation = false,
+            state.appendString = '',
+            state.openParenthesisCount = 0
+            state.subsequentEquation = false
+            return
+        },
+        compute(state){
+            // add close parenthesis if necessary
+            if (state.openParenthesisCount > 0){
+                for(let i = state.openParenthesisCount; i > 0; i--){
+                    state.equation += ')'
+                }
                 state.openParenthesisCount = 0
-                state.subsequentEquation = false
+            }
+            
+            // solve equation
+            try{
+                let solution = evaluate(state.equation)
+                if(typeof(solution) === 'number'){
+                    state.screen1Num = solution
+                    state.subsequentEquation = true
+                }
                 return
             }
 
-            else if (payload.val === '='){
-                if (state.openParenthesisCount > 0){
-                    for(let i = state.openParenthesisCount; i > 0; i--){
-                        state.equation += ')'
-                    }
-                    state.openParenthesisCount = 0
-                }
-                try{
-                    let solution = evaluate(state.equation)
-                    if(typeof(solution) === 'number'){
-                        state.screen1Num = solution
-                        state.subsequentEquation = true
-                    }
-                }
-                catch(e1) {
-                    state.screen1Num = 'ERROR'
-                    return 
-                }
+            // handle incorrect equation
+            catch(e1) {
+                state.screen1Num = 'ERROR'
+                return 
             }
         }
     }
 })
-  
-export default store

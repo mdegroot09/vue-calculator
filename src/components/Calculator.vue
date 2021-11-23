@@ -8,26 +8,26 @@
                 <span class="margin-right-15px overflow-x-auto overflow-y-hidden text-xl font-medium">{{equation}}</span>
             </div> 
             <div class="calcBtns h-full grid grid-cols-4 grid-rows-5 gap-3">
-                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="updateEquation('(')">(</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="updateEquation(')')">)</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="updateEquation('^')">^</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="updateEquation('/')">/</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="updateEquation(7)">7</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="updateEquation(8)">8</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="updateEquation(9)">9</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="updateEquation('*')">x</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="updateEquation(4)">4</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="updateEquation(5)">5</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="updateEquation(6)">6</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="updateEquation('-')">-</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="updateEquation(1)">1</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="updateEquation(2)">2</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="updateEquation(3)">3</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="updateEquation('+')">+</button>
-                <button class="calcBtn cursor-pointer w-full bg-red-400 rounded-md grid items-center" @click="updateEquation('C')">C</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="updateEquation(0)">0</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="updateEquation('.')">.</button>
-                <button class="calcBtn cursor-pointer w-full bg-yellow-500 rounded-md grid items-center" @click="updateEquation('=')">=</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="addParenthesis('(')">(</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="addParenthesis(')')">)</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="addOperation('^')">^</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="addOperation('/')">/</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="addNumber(7)">7</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="addNumber(8)">8</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="addNumber(9)">9</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="addOperation('*')">x</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="addNumber(4)">4</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="addNumber(5)">5</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="addNumber(6)">6</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="addOperation('-')">-</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="addNumber(1)">1</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="addNumber(2)">2</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="addNumber(3)">3</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="addOperation('+')">+</button>
+                <button class="calcBtn cursor-pointer w-full bg-red-400 rounded-md grid items-center" @click="clear()">C</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="addNumber(0)">0</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="addNumber('.')">.</button>
+                <button class="calcBtn cursor-pointer w-full bg-yellow-500 rounded-md grid items-center" @click="compute()">=</button>
             </div>
         </div>
     </div>
@@ -43,10 +43,26 @@ export default {
         div: String
     },
     methods: {
-        updateEquation(val){
-            this.$store.commit('updateEquation', {
+        addNumber(val){
+            this.$store.commit('addNumber', {
                 val
             })
+        },
+        addOperation(val){
+            this.$store.commit('addOperation', {
+                val
+            })
+        },
+        addParenthesis(val){
+            this.$store.commit('addParenthesis', {
+                val
+            })
+        },
+        compute(){
+            this.$store.commit('compute')
+        },
+        clear(){
+            this.$store.commit('clear')
         }
     },
     computed: mapState({
