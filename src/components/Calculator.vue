@@ -26,7 +26,7 @@
                 <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="addOperation('+')">+</button>
                 <button class="calcBtn cursor-pointer w-full bg-red-400 rounded-md grid items-center" @click="clear()">C</button>
                 <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="addNumber(0)">0</button>
-                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="addNumber('.')">.</button>
+                <button class="calcBtn cursor-pointer w-full bg-gray-300 rounded-md grid items-center" @click="addDecimal()">.</button>
                 <button class="calcBtn cursor-pointer w-full bg-yellow-500 rounded-md grid items-center" @click="compute()">=</button>
             </div>
         </div>
@@ -47,6 +47,9 @@ export default {
             this.$store.commit('addNumber', {
                 val
             })
+        },
+        addDecimal(){
+            this.$store.commit('addDecimal')
         },
         addOperation(val){
             this.$store.commit('addOperation', {

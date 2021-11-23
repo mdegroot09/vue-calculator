@@ -3,10 +3,11 @@ import {evaluate} from 'mathjs'
 
 export default createStore({
     state: {
-        screen1Num: 0,
+        screen1Num: '0',
         equation: '',
-        appendToScreenNum: false,
+        appendToNum: false,
         readyForNum: true,
+        readyForDecimal: true,
         readyForOperation: false,
         appendString: '',
         openParenthesisCount: 0,
@@ -24,7 +25,7 @@ export default createStore({
             // handle numbers
             if (state.readyForNum){
                 // don't allow zero as beginning number
-                if(!state.appendToScreenNum && payload.val === 0){
+                if(!state.appendToNum && payload.val === 0){
                     return 
                 }
                 // if beginning of equation OR subsequent equation
@@ -33,8 +34,13 @@ export default createStore({
                     state.equation = String(payload.val)
                 }
                 // if appending to a number
-                else if(state.appendToScreenNum){
-                    state.screen1Num = Number(`${state.screen1Num}${payload.val}`)
+                else if(state.appendToNum){
+                    state.screen1Num = `${state.screen1Num}${payload.val}`
+                    state.equation += String(payload.val)
+                }
+                // if appending to a decimal
+                else if (!state.readyForDecimal){
+                    state.screen1Num = `${state.screen1Num}${payload.val}`
                     state.equation += String(payload.val)
                 }
                 // if ready for a number
@@ -43,7 +49,7 @@ export default createStore({
                     state.equation += state.appendString + String(payload.val)
                 }
                 // update settings
-                state.appendToScreenNum = true
+                state.appendToNum = true
                 state.readyForNum = true
                 state.readyForOperation = true
                 state.appendString = ''
@@ -51,10 +57,26 @@ export default createStore({
                 return
             }
         },
+        addDecimal(state){
+            if (state.appendToNum && state.readyForDecimal){
+                state.screen1Num = `${state.screen1Num}.`
+                state.equation += '.'
+            }
+            else if (state.readyForDecimal){
+                state.screen1Num = '0.'
+                state.equation += '0.'
+            }
+            state.appendToNum = true
+            state.readyForDecimal = false
+            state.readyForOperation = true
+            state.appendString = ''
+            state.subsequentEquation = false
+        },
         addOperation(state, payload){
             state.equation += ` ${payload.val}`
-            state.appendToScreenNum = false
+            state.appendToNum = false
             state.readyForNum = true
+            state.readyForDecimal = true
             state.readyForOperation = false
             state.appendString = ' '
             state.subsequentEquation = false
@@ -62,12 +84,13 @@ export default createStore({
         },
         addParenthesis(state, payload){
             if(payload.val === '('){
-                if (state.appendToScreenNum || state.readyForOperation){
+                if (state.appendToNum || state.readyForOperation){
                     state.appendString = ' * '
                 }
                 state.equation += state.appendString + '('
-                state.appendToScreenNum = false
+                state.appendToNum = false
                 state.readyForNum = true
+                state.readyForDecimal = true
                 state.readyForOperation = false
                 state.appendString = ''
                 state.openParenthesisCount++
@@ -78,7 +101,7 @@ export default createStore({
             // closed parenthesis must have open parenthesis
             else if(payload.val === ')' && state.openParenthesisCount > 0){
                 state.equation += ')'
-                state.appendToScreenNum = false
+                state.appendToNum = false
                 state.readyForNum = false
                 state.readyForOperation = true
                 state.appendString = ' '
@@ -90,7 +113,7 @@ export default createStore({
             // handle clear
             state.screen1Num = 0,
             state.equation = '',
-            state.appendToScreenNum = false,
+            state.appendToNum = false,
             state.readyForNum = true,
             state.readyForOperation = false,
             state.appendString = '',
