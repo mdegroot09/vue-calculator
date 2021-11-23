@@ -15,13 +15,6 @@ export default createStore({
     },
     mutations: {
         addNumber(state, payload){
-
-            // if starting a subsequent equation and val is not a number
-            if (state.subsequentEquation === true && typeof(payload.val) !== 'number'){
-                // update equation to match solution value and continue 
-                state.equation = state.screen1Num
-            }
-
             // handle numbers
             if (state.readyForNum){
                 // don't allow zero as beginning number
@@ -58,13 +51,19 @@ export default createStore({
             }
         },
         addDecimal(state){
+            // if starting a subsequent equation
+            if (state.subsequentEquation === true){
+                // update equation to match solution value and continue 
+                state.equation = state.screen1Num
+            }
+
             if (state.appendToNum && state.readyForDecimal){
                 state.screen1Num = `${state.screen1Num}.`
                 state.equation += '.'
             }
             else if (state.readyForDecimal){
                 state.screen1Num = '0.'
-                state.equation += '0.'
+                state.equation += `${state.appendString}0.`
             }
             state.appendToNum = true
             state.readyForDecimal = false
@@ -73,6 +72,12 @@ export default createStore({
             state.subsequentEquation = false
         },
         addOperation(state, payload){
+            // if starting a subsequent equation
+            if (state.subsequentEquation === true){
+                // update equation to match solution value and continue 
+                state.equation = state.screen1Num
+            }
+
             state.equation += ` ${payload.val}`
             state.appendToNum = false
             state.readyForNum = true
@@ -83,6 +88,12 @@ export default createStore({
             return
         },
         addParenthesis(state, payload){
+            // if starting a subsequent equation
+            if (state.subsequentEquation === true){
+                // update equation to match solution value and continue 
+                state.equation = state.screen1Num
+            }
+            
             if(payload.val === '('){
                 if (state.appendToNum || state.readyForOperation){
                     state.appendString = ' * '

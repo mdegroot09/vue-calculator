@@ -2,10 +2,10 @@
     <div class="w-screen h-screen grid items-center justify-center">
         <div class="calculator rounded-md bg-blue-400 grid grid-cols-1 grid-rows-3 items-center justify-center">
             <div class="screen bg-yellow-100 rounded-md grid justify-end items-center">
-                <span class="margin-right-15px overflow-x-auto overflow-y-hidden text-5xl font-medium">{{screen1Num}}</span>
+                <span class="margin-right-15px overflow-x-visible overflow-y-hidden text-5xl font-medium">{{screen1Num}}</span>
             </div> 
             <div class="screen screen2 bg-gray-300 rounded-md grid justify-end items-center self-start">
-                <span class="margin-right-15px overflow-x-auto overflow-y-hidden text-xl font-medium">{{equation}}</span>
+                <span class="margin-right-15px overflow-x-visible overflow-y-hidden text-xl font-medium w-full">{{equation}}</span>
             </div> 
             <div class="calcBtns h-full grid grid-cols-4 grid-rows-5 gap-3">
                 <button class="calcBtn cursor-pointer w-full bg-gray-500 rounded-md grid items-center" @click="addParenthesis('(')">(</button>
